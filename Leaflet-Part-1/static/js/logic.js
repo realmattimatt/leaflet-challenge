@@ -6,28 +6,48 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(myMap);
 
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function (data) {
+  // console.log("Earthquake Data:", data); Testing for bad data.
+
   // Loop through the data and add it to the map
   L.geoJson(data, {
     pointToLayer: function (feature, latlng) {
+      let depth = feature.geometry.coordinates[2];
+      let radius = (depth !== null && depth !== undefined && !isNaN(depth)) ? Math.sqrt(feature.properties.mag) * 4 : 0;
+    
+      // Debugging logs
+      // console.log("LatLng:", latlng);
+      // console.log("Depth:", depth);
+      // console.log("Radius:", radius);
+    
+      if (isNaN(radius) || radius <= 0) {
+        radius = 0;
+        // console.log("Setting radius to 0 due to invalid value"); If using the Math.sqrt function to emphasize circle sizes, this is needed. Negative (above ground), readings will give it a NaN and cause error codes in the console, even while most of the rest work. This just sets all negative values to 0.  
+      }
+    
+      // Return marker
       return L.circleMarker(latlng, {
-        radius: Math.sqrt(feature.properties.mag) * 6, // Adjust the radius based on magnitude, used Math.sqrt for consistency.
-        fillColor: getColor(feature.geometry.coordinates[2]), // Use depth to determine color
-        color: "#000", // Outline color is black
-        weight: 1, // Outline width narrow
+        radius: radius,
+        fillColor: getColor(depth),
+        color: "#000",
+        weight: 1,
         opacity: 1,
         fillOpacity: 0.8
       });
-    },
+    }
+    ,
+
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + feature.geometry.coordinates[2].toFixed(3) + " km");
+      let depth = feature.geometry.coordinates[2];
+      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + depth.toFixed(3) + " km");
     }
   }).addTo(myMap);
 });
 
+
 // Function to set marker color based on depth
 function getColor(depth) {
-  if (isNaN(depth)) {
-    return "#FFFFFF";  // Return a fallback color (white) if depth is NaN
+  if (depth === null || depth === undefined || isNaN(depth)) {
+    return "#FFFFFF";  // Return a fallback color (white) if depth is null, undefined, or NaN
   }
 
   return depth > 110 ? "#990000" // dark red
@@ -48,9 +68,9 @@ legend.onAdd = function (map) {
 
   div.innerHTML += '<strong>Earthquake Depths<br>Below Ground</strong><br><br>';  // Title "Earthquake Depths Below Ground"
   // Define the depth ranges and colors
-  let depths = [-15, 10, 30, 50, 70, 90, 110, 130];  // Define the depth ranges
+  let depths = [-10, 10, 30, 50, 70, 90, 110, 130];  // Define the depth ranges
   let colors = [
-    "#009900",  // Dark green (-15 to 10)
+    "#009900",  // Dark green (< 10)
     "#33cc33",  // Lighter green (10 to 30)
     "#66ff00",  // Green (30 to 50)
     "#ffcc00",  // Yellow (50 to 70)
