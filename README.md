@@ -20,21 +20,29 @@
   - [**Contact**](#contact)
 
 ## **Project Overview**
-screenshot if applicable then overview description.
-add here
+![Dashboard Screenshot](/Images/Images/Part1_overview.png)<br><br>
+This project is focused on building an interactive map using Leaflet.js to visualize data related to global earthquakes and tectonic plates. By leveraging GeoJSON data from various sources, such as the USGS Earthquake Feed and OpenStreetMap, the map dynamically updates to display real-time earthquake activity, along with key information about the tectonic plates' locations and boundaries.
+
 
 ## **Features**
-add here
+* Real-Time Earthquake Data: The map shows earthquake data from the USGS, updated in real time, using GeoJSON format for easy integration with Leaflet.
+* Tectonic Plate Boundaries: Tectonic plates are plotted on the map, providing a visual reference for the correlation between seismic activity and plate boundaries.
+* Interactive Map: Users can zoom, pan, and click on map elements to access additional information, such as earthquake magnitudes, depths, and locations.
 
 ## **Technologies / Dependencies Needed and Used**
-add here
+* HTML: For structuring the content of the webpage.
+* CSS: For styling the map and other elements to ensure a user-friendly interface.
+* JavaScript: For implementing interactivity, data handling, and integrating with external libraries.
+* Leaflet: A leading JavaScript library for interactive maps, used to render the map and display real-time data.
+* D3: A JavaScript library for manipulating documents based on data, particularly used for rendering dynamic, data-driven visualizations on the map.
 
 ## **How to Run the Application**
 add here
 
 ## **Visualizations**
-add here
+![Sample Earthquake Map](/Images/Images/Sample_earthquake_map.png)
 
+![Above Ground Earthquake Image](Images\Images\Above_ground_earthquake.png)
 ## **Data Source**
 The data used in this dashboard is sourced from the [USGS]("https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php"), [github.com/fraxen/tectonicplates]("https://github.com/fraxen/tectonicplates"), and [openstreetmap.org]("https://www.openstreetmap.org")
 
@@ -46,18 +54,18 @@ add here
 
 ## **Sources**
 * Office hours / instructional time / T.A's
-* [Leaflet-JS]("https://leafletjs.com/reference")
-* [openstreetmap.org]("https://www.openstreetmap.org")
-* [USGS]("https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php")
-* [github.com/fraxen/tectonicplates]("https://github.com/fraxen/tectonicplates")
+* [Leaflet-JS](https://leafletjs.com/reference)
+* [openstreetmap.org](https://www.openstreetmap.org)
+* [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
+* [github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates)
 * Xpert Learning Assistant
-* [CSS W3Schools]("https://www.w3schools.com/css/")
-* [HTML]("https://www.w3schools.com/html/")
+* [CSS W3Schools](https://www.w3schools.com/css/)
+* [HTML](https://www.w3schools.com/html/)
 * Chat GPT
 
 
 ## **Additional Information**
-Issue with Negative Magnitude Values in Radius Calculation
+Issue with Negative Magnitude Values in Radius Calculation:
 
 In the project, the radius of each earthquake marker is determined by the formula `Math.sqrt(feature.properties.mag) * 6`. However, the `Math.sqrt` function in JavaScript returns `NaN` (Not-a-Number) if the input is a negative number. 
 
