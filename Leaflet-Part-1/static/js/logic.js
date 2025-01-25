@@ -1,5 +1,5 @@
 // Create the 'basemap' tile layer that will be the background of our map.
-let myMap = L.map('map').setView([51.505, -0.09], 13);
+let myMap = L.map('map').setView([38.7946, -106.5348], 4); // Center of the USA according to google.
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -10,24 +10,75 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
   L.geoJson(data, {
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng, {
-        radius: 5, // Adjust the radius based on magnitude
+        radius: Math.sqrt(feature.properties.mag) * 6, // Adjust the radius based on magnitude, used Math.sqrt for consistency.
         fillColor: getColor(feature.geometry.coordinates[2]), // Use depth to determine color
-        color: "#000", // Outline color
-        weight: 1, // Outline width
+        color: "#000", // Outline color is black
+        weight: 1, // Outline width narrow
         opacity: 1,
         fillOpacity: 0.8
       });
     },
     onEachFeature: function (feature, layer) {
-      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + feature.geometry.coordinates[2].toFixed(3) + " km");
     }
   }).addTo(myMap);
 });
 
 // Function to set marker color based on depth
 function getColor(depth) {
-  return depth > 90 ? "#ff0000" : depth > 70 ? "#ff6600" : depth > 50 ? "#ffcc00" : "#66ff00";
+  if (isNaN(depth)) {
+    return "#FFFFFF";  // Return a fallback color (white) if depth is NaN
+  }
+
+  return depth > 110 ? "#990000" // dark red
+    : depth > 90 ? "#ff0000"     // slightly lighter red
+    : depth > 70 ? "#ff6600"     // orange
+    : depth > 50 ? "#ffcc00"     // yellow
+    : depth > 30 ? "#66ff00"     // green
+    : depth > 10 ? "#33cc33"     // lighter green
+    : "#009900"                  // Dark green
+    ;                
 }
+
+// Create a legend control
+let legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+  let div = L.DomUtil.create('div', 'info legend');
+
+  div.innerHTML += '<strong>Earthquake Depths<br>Below Ground</strong><br><br>';  // Title "Earthquake Depths Below Ground"
+  // Define the depth ranges and colors
+  let depths = [-15, 10, 30, 50, 70, 90, 110, 130];  // Define the depth ranges
+  let colors = [
+    "#009900",  // Dark green (-15 to 10)
+    "#33cc33",  // Lighter green (10 to 30)
+    "#66ff00",  // Green (30 to 50)
+    "#ffcc00",  // Yellow (50 to 70)
+    "#ff6600",  // Orange (70 to 90)
+    "#ff0000",  // Red (90 to 110)
+    "#990000"   // Dark red (110+)
+  ];
+
+  // Loop through the depth ranges and generate the color-coded legend
+  for (let i = 0; i < depths.length - 1; i++) {
+    // Add the regular legend entries
+    if (i === depths.length - 2) {
+      // Special handling for the last range
+      div.innerHTML += 
+        '<div><i style="background:' + colors[i] + '"></i> ' + depths[i] + '&ndash;' + depths[i + 1] + '+ km</div>';
+    } else {
+      div.innerHTML += 
+        '<div><i style="background:' + colors[i] + '"></i> ' + depths[i] + '&ndash;' + depths[i + 1] + ' km</div>';
+    }
+  }
+
+  return div;
+};
+
+// Add the legend to the map
+legend.addTo(myMap);
+
+
 
 
 // // OPTIONAL: Step 2
