@@ -15,9 +15,9 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
       let radius = (depth !== null && depth !== undefined && !isNaN(depth)) ? Math.sqrt(feature.properties.mag) * 4 : 0;
     
       // Debugging logs
-      // console.log("LatLng:", latlng);
-      // console.log("Depth:", depth);
-      // console.log("Radius:", radius);
+      console.log("LatLng:", latlng);
+      console.log("Depth:", depth);
+      console.log("Radius:", radius);
     
       if (isNaN(radius) || radius <= 0) {
         radius = 0;
@@ -38,7 +38,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
     onEachFeature: function (feature, layer) {
       let depth = feature.geometry.coordinates[2];
-      layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Depth: " + depth.toFixed(3) + " km");
+      layer.bindPopup("<strong>Magnitude</strong>: " + feature.properties.mag + "<br><strong>Location</strong>: " + feature.properties.place + "<br><strong>Depth</strong>: " + depth.toFixed(3) + " km");
     }
   }).addTo(myMap);
 });
