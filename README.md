@@ -28,8 +28,8 @@ This project is focused on building an interactive map using Leaflet.js to visua
 * Real-Time Earthquake Data: The map shows earthquake data from the USGS, updated in real time, using GeoJSON format for easy integration with Leaflet.
 * Tectonic Plate Boundaries: Tectonic plates are plotted on the map, providing a visual reference for the correlation between seismic activity and plate boundaries.
 * Interactive Map: Users can zoom, pan, and click on map elements to access additional information, such as earthquake magnitudes, depths, and locations.
-* 1. Part 1 of interactive map can be found here [Github Pages Part 1]("https://realmattimatt.github.io/leaflet-challenge.html")
-* 2. Part 2 of interactive map can be found here [Github Pages Part 2]("https://realmattimatt.github.io/leaflet-challenge/indexPart2.html")
+* 1. Part 1 of interactive map can be found here [Github Pages Part 1](https://realmattimatt.github.io/leaflet-challenge.html)
+* 2. Part 2 of interactive map can be found here [Github Pages Part 2](https://realmattimatt.github.io/leaflet-challenge/indexPart2.html)
 
 ## **Technologies / Dependencies Needed and Used**
 * HTML: For structuring the content of the webpage.
@@ -46,8 +46,10 @@ add here
 
 ![Above Ground Earthquake Image](Images\Images\Above_ground_earthquake.png)
 
+![Geographical Sample](Images\Images\Geographical_sample.png)
+
 ## **Data Source**
-The data used in this dashboard is sourced from the [USGS]("https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php"), [github.com/fraxen/tectonicplates]("https://github.com/fraxen/tectonicplates"), and [openstreetmap.org]("https://www.openstreetmap.org")
+The data used in this dashboard is sourced from the [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php), [github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates), and [openstreetmap.org](https://www.openstreetmap.org)
 
 ## **Visualization Details**
 add here
