@@ -133,14 +133,14 @@ The development of the interactive map was carried out in the following stages:
 * [CSS W3Schools](https://www.w3schools.com/css/) - CSS documentation and examples.
 * [HTML W3Schools](https://www.w3schools.com/html/) - HTML documentation and examples.
 * ChatGPT - Assistance with problem-solving and code suggestions.
-* [Satellite Layer](https://www.esri.com/en-us/home)
+* [ERSI Satellite Layer](https://www.esri.com/en-us/home) - Using and implementing the satellite layer from ERSI
 
 
 
 ## **Additional Information**
 Issue with Negative Magnitude Values in Radius Calculation:
 
-In the project, the radius of each earthquake marker is determined by the formula `Math.sqrt(feature.properties.mag) * 6`. However, the `Math.sqrt` function in JavaScript returns `NaN` (Not-a-Number) if the input is a negative number. 
+In the project, the radius of each earthquake marker is determined by the formula `Math.sqrt(feature.properties.mag) * 6` (change the 6 to change the circle radius). However, the `Math.sqrt` function in JavaScript returns `NaN` (Not-a-Number) if the input is a negative number. 
 
 This caused issues when the magnitude (`feature.properties.mag`) had negative values, resulting in an invalid radius (i.e., `NaN`), which prevented the marker from being rendered correctly.<br>
 If radius was just set to a fixed value, making all circles the same radius this was not an issue. Unfortunately attempting to make the circles vary according to distance below ground, the few earthquakes that did happen above ground, caused the Math.sqrt to error. 
