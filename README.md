@@ -60,9 +60,9 @@ This project is focused on building an interactive map using Leaflet.js to visua
 ## **Visualizations**
 ![Sample Earthquake Map](Images/Sample_earthquake_map.png)
 
-![Above Ground Earthquake Image](Images\Above_ground_earthquake.png)
+![Above Ground Earthquake Image](Images/Above_ground_earthquake.png)
 
-![Geographical Sample](Images\Geographical_sample.png)
+![Geographical Sample](Images/Geographical_sample.png)
 
 ## **Data Source**
 The data used in this dashboard is sourced from the [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php), [github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates), and [openstreetmap.org](https://www.openstreetmap.org)
