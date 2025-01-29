@@ -20,7 +20,7 @@
   - [**Contact**](#contact)
 
 ## **Project Overview**
-![Dashboard Screenshot](/Images/Images/Part1_overview.png)<br><br>
+![Dashboard Screenshot](/Images/Part1_overview.png)<br><br>
 This project is focused on building an interactive map using Leaflet.js to visualize data related to global earthquakes and tectonic plates. By leveraging GeoJSON data from various sources, such as the USGS Earthquake Feed and OpenStreetMap, the map dynamically updates to display real-time earthquake activity, along with key information about the tectonic plates' locations and boundaries.
 
 
@@ -58,11 +58,11 @@ This project is focused on building an interactive map using Leaflet.js to visua
 
 
 ## **Visualizations**
-![Sample Earthquake Map](/Images/Images/Sample_earthquake_map.png)
+![Sample Earthquake Map](Images/Sample_earthquake_map.png)
 
-![Above Ground Earthquake Image](Images\Images\Above_ground_earthquake.png)
+![Above Ground Earthquake Image](Images\Above_ground_earthquake.png)
 
-![Geographical Sample](Images\Images\Geographical_sample.png)
+![Geographical Sample](Images\Geographical_sample.png)
 
 ## **Data Source**
 The data used in this dashboard is sourced from the [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php), [github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates), and [openstreetmap.org](https://www.openstreetmap.org)
